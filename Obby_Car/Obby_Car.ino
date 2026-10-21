@@ -25,39 +25,57 @@ void setup() {
   Motor2->setSpeed(100);
   Motor3->setSpeed(100);
   Motor4->setSpeed(100);
+
+  
 }
 
+void go_forward() {
+  Motor1->setSpeed(100);
+  Motor2->setSpeed(100);
+  Motor3->setSpeed(100);
+  Motor4->setSpeed(100);
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  Serial.println("Motror 1 forward");
-  Motor1->run(FORWARD);
-  delay(5000);
-  Motor1->run(BRAKE);
-  
-  Serial.println("Motror 2 forward");
-  Motor2->run(FORWARD);
-  delay(5000);
-  Motor2->run(BRAKE);
-  
-  Serial.println("Motror 3 forward");
-  Motor3->run(FORWARD);
-  delay(5000);
-  Motor3->run(BRAKE);
-  
-  Serial.println("Motror 1 forward");
-  Motor1->run(FORWARD);
-  delay(5000);
-  Motor4->run(BRAKE);
-  
-  Serial.println("All forward");
   Motor1->run(FORWARD);
   Motor2->run(FORWARD);
   Motor3->run(FORWARD);
   Motor4->run(FORWARD);
-  delay(5000);
+}
+
+void go_not() {
+  Motor1->setSpeed(0);
+  Motor2->setSpeed(0);
+  Motor3->setSpeed(0);
+  Motor4->setSpeed(0);
+
   Motor1->run(BRAKE);
   Motor2->run(BRAKE);
   Motor3->run(BRAKE);
   Motor4->run(BRAKE);
+}
+
+void go_back() {
+  Motor1->setSpeed(100);
+  Motor2->setSpeed(100);
+  Motor3->setSpeed(100);
+  Motor4->setSpeed(100);
+
+  Motor1->run(BACKWARD);
+  Motor2->run(BACKWARD);
+  Motor3->run(BACKWARD);
+  Motor4->run(BACKWARD);
+}
+void loop() {
+  // put your main code here, to run repeatedly:
+  go_forward();
+  delay(4000);
+
+  go_not();
+  delay(5000);
+
+  go_back();
+  delay(4000);
+
+  go_not();
+  delay(5000);
+ 
 }
