@@ -80,7 +80,7 @@ void turn(bool direction,int angle) {
   Motor3->setSpeed(100);
   Motor4->setSpeed(100);
   // turns right by 45 degrees * angle number
-  if (direction = true){
+  if (direction == true){
     Motor1->run(FORWARD);
     Motor2->run(FORWARD);
     Motor3->run(BACKWARD);
@@ -101,12 +101,12 @@ void turn(bool direction,int angle) {
 
 // goes forward or backward measured in meters
 void gobymeter(bool directy, float meters){
-  if (directy = false) {
+  if (directy == false) {
     go_back();
     delay(5000*meters);
     go_not();
   }
-  if (directy = true){
+  if (directy == true){
     go_forward();
     delay(3550*meters);
     go_not();
@@ -120,7 +120,7 @@ void loop() {
   gobymeter(true,2);
   
   delay(5000);
-
+  
   // goes forward 1 meter, turns left 90 degrees, goes forward by one meter.
   gobymeter(true,1);
 
