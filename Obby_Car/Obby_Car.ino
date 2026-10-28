@@ -7,6 +7,8 @@ Adafruit_DCMotor *Motor2 = AFMS.getMotor(2);
 Adafruit_DCMotor *Motor3 = AFMS.getMotor(3);
 Adafruit_DCMotor *Motor4 = AFMS.getMotor(4);
 
+
+//the setup
 void setup() {
   Serial.begin(9600);
   Serial.println("Riverbot DC Motor test!");
@@ -29,7 +31,11 @@ void setup() {
   
 }
 
-void go_forward() {
+
+
+
+// the backward movement
+void go_back() {
   Motor1->setSpeed(100);
   Motor2->setSpeed(100);
   Motor3->setSpeed(100);
@@ -41,6 +47,7 @@ void go_forward() {
   Motor4->run(FORWARD);
 }
 
+// the brakes
 void go_not() {
   Motor1->setSpeed(0);
   Motor2->setSpeed(0);
@@ -53,7 +60,8 @@ void go_not() {
   Motor4->run(BRAKE);
 }
 
-void go_back() {
+//the forward movement
+void go_forward() {
   Motor1->setSpeed(100);
   Motor2->setSpeed(100);
   Motor3->setSpeed(100);
@@ -64,18 +72,63 @@ void go_back() {
   Motor3->run(BACKWARD);
   Motor4->run(BACKWARD);
 }
+
+// turns
+void turn(bool direction,int angle) {
+  Motor1->setSpeed(100);
+  Motor2->setSpeed(100);
+  Motor3->setSpeed(100);
+  Motor4->setSpeed(100);
+  // turns right by 45 degrees * angle number
+  if (direction = true){
+    Motor1->run(FORWARD);
+    Motor2->run(FORWARD);
+    Motor3->run(BACKWARD);
+    Motor4->run(BACKWARD);
+    delay(465 * angle);
+    go_not();
+  }
+  //turns left by 45 degrees * angle number
+  else{
+    Motor1->run(BACKWARD);
+    Motor2->run(BACKWARD);
+    Motor3->run(FORWARD);
+    Motor4->run(FORWARD);
+    delay(465 * angle);
+    go_not();
+  }
+}
+
+// goes forward or backward measured in meters
+void gobymeter(bool directy, float meters){
+  if (directy = false) {
+    go_back();
+    delay(5000*meters);
+    go_not();
+  }
+  if (directy = true){
+    go_forward();
+    delay(3550*meters);
+    go_not();
+  }
+}
+
+
+//the routine
 void loop() {
-  // put your main code here, to run repeatedly:
-  go_forward();
-  delay(4000);
-
-  go_not();
   delay(5000);
 
-  go_back();
-  delay(4000);
+  gobymeter(true,1);
 
-  go_not();
+  delay(500);
+
+
+  turn(false, 2);
+
+  delay(500);
+
+  gobymeter(true,1);
+
   delay(5000);
- 
+
 }
