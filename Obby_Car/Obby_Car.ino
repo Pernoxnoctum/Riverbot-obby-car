@@ -116,12 +116,15 @@ void gobymeter(bool directy, float meters){
 
 //the routine
 void loop() {
+  //goes forward by 2 meters.
+  gobymeter(true,2);
+  
   delay(5000);
 
+  // goes forward 1 meter, turns left 90 degrees, goes forward by one meter.
   gobymeter(true,1);
 
   delay(500);
-
 
   turn(false, 2);
 
