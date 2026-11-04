@@ -1,4 +1,7 @@
 #include <Adafruit_MotorShield.h>
+#include <Servo.h>
+
+Servo myservo;
 
 //create motor shield object and 4 motors
 Adafruit_MotorShield AFMS = Adafruit_MotorShield();
@@ -7,11 +10,27 @@ Adafruit_DCMotor *Motor2 = AFMS.getMotor(2);
 Adafruit_DCMotor *Motor3 = AFMS.getMotor(3);
 Adafruit_DCMotor *Motor4 = AFMS.getMotor(4);
 
+// defines pins numbers
+const int trigPin = 11;
+const int echoPin = 12;
+
+// defines variables
+long duration;
+int distance;
+
 
 //the setup
 void setup() {
   Serial.begin(9600);
   Serial.println("Riverbot DC Motor test!");
+
+  myservo.attach(10);
+
+  // definitely correct this.
+  pinMode(8, OUTPUT); // turns on the thing
+	pinMode(trigPin, OUTPUT);// Sets the trigPin as an Output
+	pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+	digitalWrite(8, HIGH);// makes the sonar pinger turn on
 
   //start the motor shield
   if (!AFMS.begin()) {
@@ -113,25 +132,38 @@ void gobymeter(bool directy, float meters){
   }
 }
 
+void sonar(){
+  // Clears the trigPin
+	digitalWrite(trigPin, LOW);
+	delayMicroseconds(2);
+
+	// Sets the trigPin on HIGH state for 10 micro seconds
+	digitalWrite(trigPin, HIGH);
+	delayMicroseconds(10);
+	digitalWrite(trigPin, LOW);
+
+	// Reads the echoPin, returns the sound wave travel time in microseconds
+	duration = pulseIn(echoPin, HIGH);
+
+	// Calculating the distance
+	distance = duration * 0.034 / 2;
+
+	// Prints the distance on the Serial Monitor
+	Serial.print("Distance: ");
+	Serial.println(distance);
+}
 
 //the routine
 void loop() {
-  //goes forward by 2 meters.
-  gobymeter(true,2);
-  
-  delay(5000);
-  
-  // goes forward 1 meter, turns left 90 degrees, goes forward by one meter.
+  sonar();
+  while (distance >= 30){
+    go_forward();
+    sonar();
+  }
+  go_not();
+  turn(false,2);
   gobymeter(true,1);
-
-  delay(500);
-
-  turn(false, 2);
-
-  delay(500);
-
-  gobymeter(true,1);
-
+  go_not();
   delay(5000);
 
 }
