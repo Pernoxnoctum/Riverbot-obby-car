@@ -1,3 +1,6 @@
+// You can't add the entire program again at the end. It calls an error per function, also the "NEW CODE" you wrote wasn't a comment.
+// I'm not done reviewing the code, but it's looking good so far.
+
 #include <Adafruit_MotorShield.h>
 #include <Servo.h>
 
