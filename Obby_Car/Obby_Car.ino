@@ -1,5 +1,5 @@
-// You can't add the entire program again at the end. It calls an error almost per line that is duplicated, also the "NEW CODE" you wrote wasn't a comment.
-// other than that, your code looks great. we'll have to test it still, but it will probably work.
+// You can't add the entire program again at the end. It calls an error almost per line that is duplicated, also the "NEW CODE" you wrote wasn't a comment. - Pernox
+// other than that, your code looks great. we'll have to test it still, but it will probably work. - Pernox
 
 #include <Adafruit_MotorShield.h>
 #include <Servo.h>
